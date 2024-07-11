@@ -59,7 +59,7 @@ third_party (contains cpp-dotenv)
 
 # Esecuzione
 Al momento questa versione di ***test*** esegue unicamente sul file `32_684000_4930000.las`, che va inserito nella cartella `/assets/lidar`.\
-Va inoltre inserito il file `.csv` relativo ai buildings nella cartella `/assets`.
+Va inoltre inserito il file `.csv` relativo ai buildings nella cartella `/assets` e modificato il file `/config/config.env` in base al path utilizzato. 
 
 Infine, è necessario eseguire il seguente comando nella cartella `third_party`:
 ```
