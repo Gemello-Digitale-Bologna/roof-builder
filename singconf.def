@@ -1,0 +1,32 @@
+Bootstrap: docker
+From: ubuntu:22.04
+
+%post
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update && apt-get install -y \
+        build-essential cmake git pkg-config locales python3-dev python3-numpy python3-pip libgl1-mesa-glx libomp-dev
+    locale-gen en_US.UTF-8
+    git clone https://github.com/libgeos/geos.git && \
+        cd /geos && mkdir build && cd build && \
+        cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local .. && \
+        make && \
+        make install && \
+        rm -rf /geos
+    cd /
+    pip install laspy scikit-image opencv-python-headless
+    cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
+    cmake --build build
+    mkdir assets output
+
+%environment
+    export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
+    export LC_ALL=C
+    export LANG=en_US.UTF-8  
+    export LANGUAGE=en_US:en  
+    export LC_ALL=en_US.UTF-8
+
+%files
+    src /src
+    third_party /third_party
+    config/config_docker.env /config/config.env
+    CMakeLists.txt CMakeLists.txt

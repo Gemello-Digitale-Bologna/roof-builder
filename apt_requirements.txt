@@ -1,0 +1,10 @@
+build-essential
+cmake
+git
+pkg-config
+locales
+python3-dev
+python3-numpy
+python3-pip
+libgl1-mesa-glx
+libomp-dev
